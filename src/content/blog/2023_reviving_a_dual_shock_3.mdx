@@ -1,0 +1,62 @@
+---
+title: 'Reviving a Dualshock 3'
+description: 'Fighting gunk with isopropyl alcohol'
+pubDate: 'Nov 25 2023'
+updatedDate: 'Dec 02 2023'
+cover: '@/assets/2023_reviving_a_dual_shock_3/ds3_1.jpg'
+coverAlt: 'Internal view of DualShock 3 controller with emphasis on the printed circuit board (PCB).'
+---
+
+import { Image } from "astro:assets";
+import openControllerImg from "@/assets/2023_reviving_a_dual_shock_3/ds3_2.jpg";
+
+Recently, I stumbled upon my long-lost PlayStation 3, triggering a wave of nostalgia. 
+While the console itself was in decent condition, the controllers were in a deplorable state.
+
+There were numerous games I had never been able to play on this gaming system. 
+Motivated by this, I set out to revive it.
+
+Primarily, among the two controllers, one failed to turn on, while the other exhibited 
+inconsistent behavior (it turned on, but the input was erratic, functioning solely via cable).
+
+I embarked on a mission to acquire replacement parts, specifically batteries, a cable, and new thumbsticks.
+
+I replaced the thumbsticks and the battery of the seemingly functional controller. However, 
+upon closing and testing it, I was surprised when the system recognized it, yet no input was registered. 
+Even after attempting to connect it to the console, the problem persisted. Suspecting the new battery as 
+the issue, I reverted to the old one, but it didn't resolve the problem.
+
+After an unintentional "gentle" shake (read: the controller fell off the table), signs of life emerged. 
+This incident made me suspect a potential membrane or PCB contact problem, yet it was too late to delve 
+into it further that day.
+
+The next day, the controller worked with the console, albeit with some buttons unresponsive, reinforcing 
+the suspicion of poor contact. Nevertheless, it was usable in some games.
+
+The biggest frustration with this controller lies in its directional controls. They exhibit some drift, 
+a common issue with this particular controller featuring the more exotic four-terminal analog stick. 
+Finding a replacement for it is nearly impossible.Furthermore, there's a technical challenge in replacing them, 
+which involves what I believe to be 16 soldering points of varying sizes.
+
+Ultimately, considering it's a controller with over a decade of use, the outcomes were encouraging.
+
+Hope remains alive to play Metal Gear and God of War, maybe even this year...
+
+> ## Update (Dec 2, 2023)
+
+I took extra time to investigate the suspected poor contact issues by disassembling it once more—this time, 
+entirely. I cleaned all the membranes and internal contacts, which had visible dust/gunk in certain areas. 
+
+<figure>
+  <Image class="shadow" src={openControllerImg} alt="Buttons and internals of DS3 disassembled." />
+  <figcaption>Cleaning contacts, membranes, and everything in between.</figcaption>
+</figure>
+
+There was also an almost imperceptible looseness in the primary contact between the membrane connecting the 
+front buttons and the PCB (which was remediated). After drying and reassembly, the buttons now function much better. 
+Additionally, the controller also works wirelessly (although I'm unsure if the two situations are related).
+
+Consequently, the only lingering frustration remains with the analog directional controls. Nevertheless, 
+the controller is now fully functional. After a few minutes of use, the drift becomes negligible.
+
+Despite the laborious process, it was worthwhile.

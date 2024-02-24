@@ -1,0 +1,70 @@
+---
+interface Track {
+  name: string;
+  path: string;
+  loop?: boolean;
+}
+
+interface Props {
+  title: string;
+	tracks: Track[];
+}
+
+const { title, tracks } = Astro.props;
+---
+
+<div class="player">
+  <ul>
+    <li class="title"><b>{title}</b></li>
+    {
+      tracks.map((track) => (
+        <li>
+          {track.name}
+          <audio src={track.path} loop={track.loop} preload="none" controls></audio>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+.player {
+  width: 100%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.player ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.player ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: .75em;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.player ul li.title {
+  font-size: 115%;
+}
+
+.player ul li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 540px) {
+  .player ul li {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  .player ul li audio {
+    width: 100%;
+  }
+}
+</style>

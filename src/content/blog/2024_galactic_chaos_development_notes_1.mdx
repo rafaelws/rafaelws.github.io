@@ -1,0 +1,149 @@
+---
+title: 'Galactic Chaos - The Road so far'
+description: 'Galactic Chaos development notes #1'
+pubDate: 'Feb 24 2024'
+cover: '@/assets/2023_galactic_chaos_development_notes_1/demo.gif'
+coverAlt: 'Animated showcasing of Galactic Chaos gameplay.'
+---
+
+import { Image } from "astro:assets";
+
+import playgroundGif from "@/assets/2023_galactic_chaos_development_notes_1/playground.gif";
+import debugGif from "@/assets/2023_galactic_chaos_development_notes_1/debug.gif";
+
+import Player from "@/components/Player.astro";
+
+<nav class="links" style="margin-top: -1em"><a target="_blank" href="https://rafaelws.github.io/galactic-chaos/">Play</a><a target="_blank" href="https://github.com/rafaelws/galactic-chaos/">Source code</a></nav>
+
+<figure>
+  <video controls preload="metadata" poster="/2023_galactic_chaos_development_notes_1/poster.webp" width="100%" class="shadow">
+    <source src="/2023_galactic_chaos_development_notes_1/gameplay.webm" type="video/webm"/>
+    <source src="/2023_galactic_chaos_development_notes_1/gameplay.mp4" type="video/mp4"/>
+  </video>
+  <figcaption>Complete gameplay of the latest version.</figcaption>
+</figure>
+
+It's been a long journey since I started Galactic Chaos. I chose to focus on this project because 
+it involves many of my personal interests and allows me to experiment and do things that I hadn't 
+had the opportunity to do before.
+
+I've been a gaming enthusiast for a long time, but I've never had the time to try making one myself. 
+Since I've never developed a game, I wanted to go through the fundamentals rather than relying on an 
+engine (e.g. Godot, Unity, Unreal Engine). To offset this drawback, I opted for a programming language
+I'm familiar with (JavaScript/TypeScript).
+
+Finally, I aimed for it to be easily playable by anyone, which meant removing additional friction 
+such as the need for downloads and installations. Hence, the decision to make it web-based. 
+Additionally, the game isn't resource-intensive, so it can be played on less powerful hardware. For 
+instance, I used a 4th-gen Intel CPU with integrated graphics during development.
+
+Today, I'm making both the game and its source code publicly available.
+
+The following sections will highlight some features I've had the joy of implementing. 
+
+<div style="font-size: 65%">
+  <blockquote>
+    For further relevant/technical details, please refer to the [README](https://github.com/rafaelws/galactic-chaos/blob/main/docs/README.md).
+  </blockquote>
+</div>
+
+## On-screen debugger
+
+This feature has been incredibly helpful and was among the first to be implemented. Logging or 
+debugging wasn't an effective method for identifying certain issues, especially considering the 
+game runs numerous cycles per second.
+
+<figure>
+  <Image src={debugGif} alt="Animated demonstration of debugging capabilities." class="shadow" />
+  <figcaption>On-screen debugger</figcaption>
+</figure>
+
+The debugger can be enabled or disabled for groups of entities or individually (player, enemy, boss).
+Available visualizations include the movement trajectory 
+(depicted by white dotted lines), the entity's hitbox (illustrated as red circles), as well as 
+the entity's angle and absolute position within the canvas.
+
+Additionally, the debugger offers a global summary, providing canvas dimensions, 
+frame time, and frames per second count.
+
+## [Playground](https://rafaelws.github.io/galactic-chaos/playground)
+
+As mentioned [here](https://github.com/rafaelws/galactic-chaos/blob/main/docs/README.md#movement), 
+implementing movement has been one of the most challenging aspects of the project thus far.
+
+I've created a movement abstraction for game objects based on relative coordinates (ranging from 0 to 1), 
+which are then calculated in relation to the canvas dimensions.
+
+The idea seemed okay; however, creating new enemy patterns became cumbersome due to the complexity of movesets,
+which rely on these relative coordinates. The process of envisioning and implementing these movesets was time-consuming.
+
+The playground served as a GUI tool that helped alleviate this issue. At some point, 
+I intended to create a full-fledged level designer. 
+However, this would have taken me too far off course.
+
+I came to the conclusion that the best solution would be the `playground`, which 
+serves as a showcase tool as well as a platform allowing me to experiment with movement parameters.
+
+This way, what has been accomplished so far could potentially serve as a foundation for a future level designer.
+
+<figure>
+  <Image class="shadow" src={playgroundGif} alt="Animated demonstration that explores the application's playground functionality."/>
+  <figcaption>[Playground](https://rafaelws.github.io/galactic-chaos/playground)</figcaption>
+</figure>
+
+An important decision was choosing [Solid](https://www.solidjs.com/) over React or direct DOM manipulation
+to develop the `playground`.
+
+This decision wasn't immediate. I began with raw DOM manipulation, but it soon became challenging to maintain.
+Therefore, I initially delved into React, which is my familiar territory. 
+However, I encountered two major issues:
+- Obstructive (component) lifecycle
+- Excessive file size
+
+Instead of attempting to work around those issues, I took the liberty to experiment with something new.
+
+When I say 'new,' I'm referring to something other than the big three (React, Angular, Vue). 
+With that in mind, there were two contenders: Svelte and Solid.
+Despite the considerable hype around Svelte, I ultimately chose Solid for its:
+- Non-obstructive (component) lifecycle
+- Reduced file size
+- Speed (running, building, etc.)
+- Familiar syntax
+
+Surprisingly, the learning curve turned out to be shorter than expected due to its 
+similarities with React. A significant factor for me was Solid's different approach 
+to handling (component) lifecycle, which made integration with my existing code base easier.
+
+After implementing the `playground` and having a good experience with Solid, I've also used it 
+for the menus of the game.
+
+Overall, I've appreciated the experience with Solid, and I highly encourage anyone interested 
+to explore it further. There's much more depth to it than what has been superficially mentioned here.
+
+## OST
+
+Also, not exactly a feature, but something I'd like to highlight: the game's 
+soundtrack was created by me.
+
+<Player id="ost-player" title="Galactic Chaos (OST)" tracks={[
+  {name: 'Main Menu', path: '/2023_galactic_chaos_development_notes_1/main-menu.ogg', loop: false},
+  {name: 'First Level', path: '/2023_galactic_chaos_development_notes_1/first-theme.ogg', loop: false},
+  {name: 'First Boss', path: '/2023_galactic_chaos_development_notes_1/first-boss-theme.ogg', loop: false},
+  {name: 'Pause (loop)', path: '/2023_galactic_chaos_development_notes_1/pause.ogg', loop: true},
+  {name: 'Game Over (loop)', path: '/2023_galactic_chaos_development_notes_1/game-over.ogg', loop: true},
+]} />
+
+## Conclusion
+
+There are several features, improvements, and fixes that [I still would like to make](https://github.com/rafaelws/galactic-chaos/#known-issues):
+ - Making it playable on mobile devices
+ - Ensuring responsiveness to window resizing events
+ - Enhancing asset loading (on-demand for both audio and images)
+ - Development of a level designer
+
+Additionally, numerous gameplay ideas are in consideration:
+ - Adding more levels
+ - Implementing different difficulty levels
+ - Introducing game modes: story and survival
+
+As Galactic Chaos continues as an ongoing project, I'm keen about the journey ahead.

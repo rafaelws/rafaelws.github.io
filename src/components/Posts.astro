@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import FormattedDate from '@/components/FormattedDate.astro';
+
+interface Props {
+  style?: string;
+}
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<section class="posts" style={Astro.props.style}>
+  <h3>Posts</h3>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/posts/${post.slug}/`}>
+            <p class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+            <h1 class="title">{post.data.title}</h1>
+            <span class="description">{post.data.description}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+.posts {
+  margin-top: 1.5em;
+}
+
+.posts ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.posts ul li * {
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.posts li a:hover * {
+  color: var(--accent);
+}
+
+.posts li a {
+  display: block;
+}
+
+.posts .title {
+  margin: 0;
+  color: var(--heading-color);
+  line-height: 1;
+  font-size: 1.25em;
+}
+
+.posts .date {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.posts .description {
+  color: var(--text-color);
+  font-size: 80%;
+}
+</style>

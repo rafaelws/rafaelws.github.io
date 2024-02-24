@@ -1,0 +1,253 @@
+/*
+ * Bear Blog's default CSS.
+ * https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+ * License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+/* the contents of :root should be equal .light (and vice-versa) */
+@media (prefers-color-scheme: light) {
+	:root {
+		--background-color: #F8F9FA;
+
+		--heading-color: #212529;
+		--text-color: #343A40;
+		--primary-color: #6C757D;
+		--secondary-color: #CED4DA;
+
+		--accent: #007FFF;
+		--accent-higher: #7FB3FF;
+
+		--footer-bg-color: #ededed;
+
+		--code-bg-color: #dbe0e4;
+		--code-text-color: var(--text-color);
+	}
+}
+
+/* the contents of :root should be equal .dark (and vice-versa) */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-color: #212529;
+	
+		--heading-color: #ededee;
+		--text-color: #CED4DA;
+		--primary-color: #99aab9;
+		--secondary-color: #343A40;
+	
+		--accent: #00d0ff;
+		--accent-higher: #66E0FF;
+	
+		--footer-bg-color: #2b333b;
+	
+		--code-bg-color: #acb8c3;
+		--code-text-color: var(--background-color);
+	}
+}
+
+.light {
+	--background-color: #F8F9FA;
+
+	--heading-color: #212529;
+	--text-color: #343A40;
+	--primary-color: #6C757D;
+	--secondary-color: #CED4DA;
+
+	--accent: #007FFF;
+	--accent-higher: #7FB3FF;
+
+	--footer-bg-color: #ededed;
+
+	--code-bg-color: #dbe0e4;
+	--code-text-color: var(--text-color);
+}
+
+.dark {
+	--background-color: #212529;
+
+	--heading-color: #ededee;
+	--text-color: #CED4DA;
+	--primary-color: #99aab9;
+	--secondary-color: #343A40;
+
+	--accent: #00d0ff;
+	--accent-higher: #66E0FF;
+
+	--footer-bg-color: #2b333b;
+
+	--code-bg-color: #acb8c3;
+	--code-text-color: var(--background-color);
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url('/fonts/poppins-regular.woff2') format('woff2'),
+		url('/fonts/poppins-regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+html {
+	background-color: var(--background-color);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	/* background: linear-gradient(var(--gray-gradient)) no-repeat; */
+	/* background-size: 100% 600px; */
+	text-align: left;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	
+	font-family: 'Poppins', sans-serif;
+	color: var(--text-color);
+	font-size: 20px;
+	line-height: 1.7;
+}
+
+main {
+	width: 720px;
+	max-width: calc(100% - 2em);
+	margin: auto;
+	padding: 3em 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5rem 0;
+	color: var(--heading-color);
+	line-height: 1.2;
+}
+
+h1 {
+	font-size: 3.052em;
+}
+
+h2 {
+	font-size: 2.441em;
+}
+
+h3 {
+	font-size: 1.953em;
+}
+
+h4, .prose h2 {
+	font-size: 1.563em;
+}
+
+h5 {
+	font-size: 1.25em;
+}
+
+strong, b {
+	font-weight: 700;
+}
+
+a {
+	color: var(--accent);
+}
+
+a:hover {
+	color: var(--accent-higher);
+	transition: 0.2s ease;
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+.prose p {
+	margin-bottom: 2rem;
+}
+
+.prose p:last-child {
+	margin-bottom: 0;
+}
+
+nav.links {
+	color: var(--secondary-color);
+	display: flex;
+	justify-content: space-evenly;
+	border-bottom: 1px solid var(--secondary-color);
+	padding-bottom: 0.5em;
+}
+
+textarea {
+	width: 100%;
+	font-size: 16px;
+}
+
+input {
+	font-size: 16px;
+}
+
+table {
+	width: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+code {
+	padding: 2px 5px;
+	background-color: var(--code-bg-color);
+	color: var(--code-text-color);
+	border-radius: 2px;
+}
+
+pre {
+	padding: 1.5em;
+	border-radius: 8px;
+}
+
+pre > code {
+	all: unset;
+}
+
+blockquote {
+	border-left: 4px solid var(--accent);
+	padding: 0 0 0 20px;
+	margin: 0px;
+	font-size: 1.333em;
+	margin-bottom: 2rem;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--secondary-color);
+}
+
+figure {
+	margin: 0;
+}
+
+figure figcaption {
+	text-align: center;
+	color: var(--primary-color);
+	margin-bottom: 1em;
+}
+
+.shadow {
+	--box-shadow-rgb: 96, 115, 159;
+	box-shadow: 0 2px 6px rgba(var(--box-shadow-rgb), 25%), 
+		0 8px 24px rgba(var(--box-shadow-rgb), 33%),
+		0 16px 32px rgba(var(--box-shadow-rgb), 33%);
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: 16px;
+	}
+	main {
+		padding: 1em;
+	}
+	.prose h1 {
+		font-size: 1.5rem;
+	}
+	.prose h2 {
+		font-size: 1.25rem;
+	}
+}

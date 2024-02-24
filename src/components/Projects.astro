@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import demoGif from '@/assets/2023_galactic_chaos_development_notes_1/demo.gif';
+---
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="project">
+    <h3>Galactic Chaos</h3>
+    <Image src={demoGif} alt="Animated showcasing of Galactic Chaos gameplay." />
+    <p class="links">
+      <a target="_blank" href="https://rafaelws.github.io/galactic-chaos/">Play</a> |
+      <a target="_blank" href="https://github.com/rafaelws/galactic-chaos/">Source code</a> |
+      <a href="/posts/2024_galactic_chaos_development_notes_1/">Development Notes #1</a>
+    </p>
+    <p class="description">
+      A (web-based) spaceship shooter game. 
+    </p>
+    <p>
+      No game engine was used. 
+      Most of the code was written in raw TypeScript, leveraging web APIs 
+      such as Canvas, Audio, and Gamepad.
+    </p>
+    <p>
+      Notable features include an on-screen debugger and a <a href="https://rafaelws.github.io/galactic-chaos/playground">playground</a>.
+    </p>
+    <p>
+      <a target="_blank" href="https://www.solidjs.com/">solidjs</a> was used to facilitate UI building for menus and the playground.
+    </p>
+    <ul class="stack">
+      <li>typescript</li>
+      <li>solidjs</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+.project {
+  padding: 2rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+}
+
+.project h3 {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 2rem;
+}
+
+.project img {
+  width: 100%;
+}
+
+.project ul.stack {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+}
+
+.project ul.stack li {
+  border-radius: 2.5px;
+  padding: .25em .5em;
+  color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  font-size: 75%;
+}
+
+@media (max-width: 720px) {
+  .project {
+    padding: 1.25rem;
+  }
+  .project h3 {
+    padding-bottom: 1.25rem;
+  }
+}
+</style>

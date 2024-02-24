@@ -1,0 +1,49 @@
+---
+import '@/assets/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	type?: string;
+}
+
+const SITE_TITLE = `Rafael - Software Developer`;
+const SITE_DESCRIPTION = `Personal website and blog of Rafael (Software Developer), 
+showcasing his personal projects alongside blog posts. This is his dedicated space 
+for sharing his work and ideas.`;
+
+const title = Astro.props.title ? `${Astro.props.title} | ${SITE_TITLE}` : SITE_TITLE;
+const description = Astro.props.description || SITE_DESCRIPTION; 
+const type = Astro.props.type || 'website';
+const image = new URL(Astro.props.image || '/favicon.svg', Astro.url).toString();
+
+import { SEO } from "astro-seo";
+---
+
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link rel="preload" href="/fonts/poppins-regular.woff2" as="font" type="font/woff2" crossorigin />
+<SEO
+	title={title}
+	description={description}
+	openGraph={{
+		basic: {
+			title,
+			type,
+			image,
+		}
+	}}
+	extend={{
+		meta: [
+			// twitter
+			// { name: "twitter:image", content: imgUrl },
+			// { name: "twitter:title", content: title },
+			// { name: "twitter:description", content: description },
+			// { name: "twitter:url", content: Astro.url.toString() },
+			// { name: "twitter:card", content: "summary" },
+		],
+	}}
+/>

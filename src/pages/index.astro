@@ -1,0 +1,24 @@
+---
+import Head from '@/components/Head.astro';
+import Intro from '@/components/Intro.astro';
+import Projects from '@/components/Projects.astro';
+import Posts from '@/components/Posts.astro';
+import Footer from '@/components/Footer.astro';
+import SwitchThemeButton from '@/components/SwitchThemeButton.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<Head title="Home" type="website" />
+	</head>
+	<body>
+		<main>
+			<SwitchThemeButton />
+			<Intro />
+			<Projects />
+			<Posts />
+		</main>
+		<Footer />
+	</body>
+</html>

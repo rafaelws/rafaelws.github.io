@@ -1,0 +1,103 @@
+<button id="switch-theme" aria-label="Theme Switcher Button">
+	<svg class="moon" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+		<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+	</svg>
+	<svg class="sun" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="12" cy="12" r="5"></circle>
+		<line x1="12" y1="1" x2="12" y2="3"></line>
+		<line x1="12" y1="21" x2="12" y2="23"></line>
+		<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+		<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+		<line x1="1" y1="12" x2="3" y2="12"></line>
+		<line x1="21" y1="12" x2="23" y2="12"></line>
+		<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+		<line x1="18.36" y1="5.64" x2="19.78" y2="4.22">
+	</line>
+	</svg>
+</button>
+
+<style>
+	#switch-theme {
+		z-index: 10;
+		position: absolute;
+		top: 0.75em;
+		right: 1em;
+		font-size: 1.2rem;
+		padding: .5rem;
+		
+		border: 2px solid var(--primary-color);
+		background-color: var(--background-color);
+		color: var(--text-color);
+
+		border-radius: 8px;
+
+		transition: 0.5s ease;
+	}
+	
+	#switch-theme:hover {
+		filter: brightness(1.5);
+	}
+
+	#switch-theme svg {
+		width: 1.5rem;
+		display: none;
+	}
+
+	#switch-theme.light svg.sun {
+		display: block;
+	}
+
+	#switch-theme.dark svg.moon {
+		display: block;
+	}
+
+	@media (max-width: 720px) {
+		#switch-theme {
+			top: 1em;
+			font-size: 1.5rem;
+		}
+	}
+</style>
+
+<script>
+	type DarkOrLight = 'dark' | 'light';
+
+	const reversedTheme = (theme: DarkOrLight): DarkOrLight => theme === 'dark' ? 'light' : 'dark';
+
+	const getButton = () => document.querySelector('#switch-theme')! as HTMLButtonElement;
+
+	const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  function setTheme(theme: DarkOrLight) {
+		const btn = getButton();
+		const doc = document.documentElement;
+		const reversed = reversedTheme(theme);
+		
+		doc.classList.add(theme);
+		doc.classList.remove(reversed);
+
+		btn.classList.add(reversed);
+		btn.classList.remove(theme);
+
+		localStorage.setItem('theme', theme);
+  }
+
+	function getCurrentTheme() {
+		const theme = localStorage.getItem('theme');
+
+		if (!!theme && (theme === 'dark' || theme === 'light')) return theme;
+
+		return prefersDark() ? 'dark' : 'light';
+	}
+
+	function changeTheme() {
+		setTheme(reversedTheme(getCurrentTheme()))
+	}
+
+  function onDomReady() {
+    getButton().addEventListener('click', () => changeTheme());
+    setTheme(getCurrentTheme());
+  }
+	
+	document.addEventListener('DOMContentLoaded', onDomReady);
+</script>

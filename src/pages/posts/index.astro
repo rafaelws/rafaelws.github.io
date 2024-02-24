@@ -1,0 +1,20 @@
+---
+import Head from '@/components/Head.astro';
+import Posts from '@/components/Posts.astro';
+import Footer from '@/components/Footer.astro';
+import SwitchThemeButton from '@/components/SwitchThemeButton.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<Head title="Posts" type="blog" />
+	</head>
+	<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <SwitchThemeButton />
+		<main>
+      <Posts style="margin: 0" />
+    </main>
+    <Footer />
+  </body>
+</html>
